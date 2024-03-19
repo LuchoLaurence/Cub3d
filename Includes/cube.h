@@ -6,7 +6,7 @@
 /*   By: fabperei <fabperei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 10:26:46 by fabperei          #+#    #+#             */
-/*   Updated: 2024/03/19 10:26:53 by fabperei         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:42:50 by fabperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,28 +159,6 @@ typedef struct s_index_vars
 	int		index;
 }					t_index_vars;
 
-int					key_press(int keycode, t_all *all_datas);
-void				remake(t_all *a);
-void				go_right(t_all *a);
-void				go_left(t_all *a);
-void				move_backward(t_all *a);
-void				move_forward(t_all *a);
-void				move_left(t_all *a);
-int					exit_close(void);
-int					close_program(t_all *a);
-void				close_image(t_all *a);
-void				mlx_begin(t_all *all_datas);
-void				init_colors(t_all *a);
-void				init_coordonates(t_all *a);
-void				init_textures(t_all *a);
-void				init_direction_w(t_all *a);
-void				init_direction_e(t_all *a);
-void				init_direction_s(t_all *a);
-void				init_direction_n(t_all *a);
-int					raycast_and_draw(t_all *all_datas);
-void				calculate_wall_dist(t_all *a);
-void				init_mlx_and_textures(t_all *a);
-void				render_floor_and_ceiling(t_all *all);
 int					check(int argc, char **argv, t_all *a);
 int					check2(int argc, char **argv);
 int					check3(t_all *a);
@@ -198,15 +176,12 @@ void				add_color_floor(char *line, t_all *a);
 void				add_color_ceilling(char *line, t_all *a);
 void				add_map(char *line, t_all *a);
 int					verif_xpm(char *file, t_all *a);
-char				orientation_player(char c);
 void				check_line(char *line, int map_line);
 void				check_1_first_line(char *line);
 void				check_1_start_line(char *line);
 void				check_1_end_line(char *line);
 int					line_is_map(char *line);
 int					line_is_map2(char *line);
-int					is_outer_border_one(char **map);
-void				check_space_in_line(char *line);
 void				create_map(t_all *a);
 void				create_map2(char line, int i, t_all *a);
 int					map_height(char **argv, t_all *a);
@@ -215,15 +190,12 @@ void				free_map2(t_all *a);
 void				init_map_data(t_all *a);
 int					ft_line_empty(char *line);
 void				error_print(char *temp, t_all *a);
-void				print_map(t_all *a);
 size_t				ft_strlen(const char *str);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				*ft_calloc_bzero(size_t count, size_t size);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strchr(const char *string, int searchedChar);
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*string_before_nl(char *s1);
-char				*string_after_nl(char *s);
 char				*get_right(char *all_line);
 char				*get_left(char *all_line);
 char				*recup_the_total_row(int fd, char *buf, char *stack);
