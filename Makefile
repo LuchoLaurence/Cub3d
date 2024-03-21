@@ -1,14 +1,6 @@
 NAME = cub3D
 
 SRCS =	srcs/main.c \
-		srcs/graphism/events.c \
-		srcs/graphism/events2.c \
-		srcs/graphism/utils.c \
-		srcs/graphism/inits.c \
-		srcs/graphism/inits2.c \
-		srcs/graphism/raycast.c \
-		srcs/graphism/raycast2.c \
-		srcs/graphism/floor_ceiling.c \
 		srcs/parsing/checks.c \
 		srcs/parsing/checks2.c \
 		srcs/parsing/gnl.c \
@@ -19,28 +11,34 @@ SRCS =	srcs/main.c \
 		srcs/parsing/add_data2.c \
 		srcs/parsing/check_map.c \
 		srcs/parsing/add_map.c \
+		srcs/graphism/init.c \
+		srcs/graphism/events.c \
+		srcs/graphism/utils.c \
+		srcs/graphism/init_raycasting.c \
+		srcs/graphism/key.c \
+		srcs/graphism/key2.c \
+		srcs/graphism/raycasting2.c \
 
 OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
 vpath %.c $(dir $(SRCS))
 
-HEADERS = -I ./includes -I /usr/X11/include
-
 FLAGS = -Wall -Wextra -Werror
 
-LIBS = -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+LIBS = -L /home/llaurenc/Documents/Cub3d/minilibx-linux -lmlx -lX11 -lXext -lm
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc $(HEADERS) $(FLAGS) -O3 -o $(NAME) $(OBJS) $(LIBS) 
+	gcc $(FLAGS) $(OBJS) -o $(NAME) $(LIBS) 
 
 objs/%.o: %.c
 	@mkdir -p objs
-	gcc $(HEADERS) $(FLAGS) -c $< -o $@
+	gcc $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f objs/*
+	rm -rf objs
 
 fclean: clean
 	rm -f $(NAME)

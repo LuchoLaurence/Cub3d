@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llaurenc <llaurenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 16:49:03 by feliciencat       #+#    #+#             */
-/*   Updated: 2024/03/21 14:13:40 by llaurenc         ###   ########.fr       */
+/*   Created: 2024/03/19 13:09:14 by llaurenc          #+#    #+#             */
+/*   Updated: 2024/03/21 14:05:07 by llaurenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cube.h"
+#include "../../Includes/cube.h"
 
-int	main(int argc, char **argv)
+int	create_trgb(int t, int r, int g, int b)
 {
-	
-	t_all	a;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
-	if (check(argc, argv, &a))
-	return (1);
-	
-	mlx_begin(&a);
-  	init_player(&a);
-	init_raytracing(&a);
-	mlx_hook(a.mlxdatas.win, 02, 1L<<0,  &ft_key_pressed, &a);
-	mlx_hook(a.mlxdatas.win, 17, 0, &(close_window), NULL); 
-	mlx_loop(a.mlxdatas.mlx);
-	
-	return (0);
+void	my_mlx_pixel_put(t_all *a, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = a->mlxdatas.addr + (y * a->mlxdatas.line_length + x
+			*(a->mlxdatas.bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

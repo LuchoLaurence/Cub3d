@@ -3,8 +3,8 @@ SO textures/colorstone.xpm
 WE textures/mossy.xpm
 EA textures/purplestone.xpm
 
-F 220,100,0
-C 225,30,0
+F 180,100,070
+C 70,180,254
 
         1111111111111111111111111
         1000000000110000000000001
