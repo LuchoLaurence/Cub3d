@@ -6,30 +6,18 @@
 /*   By: llaurenc <llaurenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:00:56 by llaurenc          #+#    #+#             */
-/*   Updated: 2024/03/21 15:53:31 by llaurenc         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:14:09 by llaurenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cube.h"
 
-//init pos player,dir and plane
-void	init_player(t_all *a)
+int	init_raytracing(t_all *a)
 {
-	a->c.pos_x = 4;
-	a->c.pos_y = 14;
-	a->c.dir_x = -1;
-	a->c.dir_y = 0;
-	a->c.plane_x = 0;
-	a->c.plane_y = 0.66;
-	a->c.move_speed = 0.15;
-	a->c.rot_speed = 0.05;
-	return ;
-}
-
-void	init_raytracing(t_all *a)
-{
-	print_c_and_f(a);
 	a->c.x = 0;
+	a->mlxdatas.img_addr = mlx_get_data_addr(a->mlxdatas.img,
+			&a->mlxdatas.bits_per_pixel,
+			&a->mlxdatas.line_length, &a->mlxdatas.endian);
 	while (a->c.x < WIDTH)
 	{
 		a->c.camera_x = 2 * a->c.x / (double)WIDTH - 1;
@@ -41,12 +29,13 @@ void	init_raytracing(t_all *a)
 		side_dist(a);
 		dda(a);
 		dist_projected(a);
+		print_c_and_f(a, a->c.x);
 		print_textures(a);
 		a->c.x++;
 	}
 	mlx_put_image_to_window(a->mlxdatas.mlx,
 		a->mlxdatas.win, a->mlxdatas.img, 0, 0);
-	return ;
+	return (0);
 }
 
 //length of ray from one x or y-side to next x or y-side

@@ -18,6 +18,8 @@ SRCS =	srcs/main.c \
 		srcs/graphism/key.c \
 		srcs/graphism/key2.c \
 		srcs/graphism/raycasting2.c \
+		srcs/graphism/textures.c \
+		srcs/graphism/init2.c
 
 OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 

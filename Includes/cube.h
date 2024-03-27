@@ -6,7 +6,7 @@
 /*   By: llaurenc <llaurenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 10:26:46 by fabperei          #+#    #+#             */
-/*   Updated: 2024/03/21 15:15:31 by llaurenc         ###   ########.fr       */
+/*   Updated: 2024/03/27 10:12:46 by llaurenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include "../minilibx-linux/mlx.h"
 
-# define WIDTH 1400
+# define WIDTH 980
 # define HEIGHT 700
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
@@ -43,7 +43,7 @@ typedef struct s_Mlxdata
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
-	unsigned int	*img_addr;
+	char	*img_addr;
 }					t_mlxdatas;
 
 typedef struct s_CoordonatesCharacter
@@ -219,8 +219,8 @@ t_index_vars		init_index_vars(char **argv);
 void				mlx_begin(t_all *a);
 void				my_mlx_pixel_put(t_all *a, int x, int y, int color);
 int					create_trgb(int t, int r, int g, int b);
-void				print_c_and_f(t_all *a);
-void				init_raytracing(t_all *a);
+void				print_c_and_f(t_all *a, int x);
+int					init_raytracing(t_all *a);
 void				init_player(t_all *a);
 void				print_textures(t_all *a);
 void				ft_verline(t_all *a, int x, int color);
@@ -236,4 +236,11 @@ void				dist_to_side(t_all *a);
 void				side_dist(t_all *a);
 void				dda(t_all *a);
 void				dist_projected(t_all *a);
+void				init_textures(t_all *a);
+void				put_textures(t_all *a);
+void				choose_texture(t_all *a);
+void				init_direction_w(t_all *a);
+void				init_direction_e(t_all *a);
+void				init_direction_s(t_all *a);
+void				init_direction_n(t_all *a);
 #endif

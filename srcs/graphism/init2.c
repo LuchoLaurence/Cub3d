@@ -1,27 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llaurenc <llaurenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/19 13:09:14 by llaurenc          #+#    #+#             */
-/*   Updated: 2024/03/26 09:28:58 by llaurenc         ###   ########.fr       */
+/*   Created: 2024/03/25 13:38:23 by llaurenc          #+#    #+#             */
+/*   Updated: 2024/03/25 13:38:27 by llaurenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cube.h"
 
-int	create_trgb(int t, int r, int g, int b)
+void	init_direction_w(t_all *a)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	a->c.dir_x = 0;
+	a->c.dir_y = -1;
+	a->c.plane_x = -0.66;
+	a->c.plane_y = 0;
 }
 
-void	my_mlx_pixel_put(t_all *a, int x, int y, int color)
+void	init_direction_e(t_all *a)
 {
-	char	*dst;
+	a->c.dir_x = 0;
+	a->c.dir_y = 1;
+	a->c.plane_x = 0.66;
+	a->c.plane_y = 0;
+}
 
-	dst = a->mlxdatas.addr + (y * a->mlxdatas.line_length + x
-			*(a->mlxdatas.bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+void	init_direction_s(t_all *a)
+{
+	a->c.dir_x = 1;
+	a->c.dir_y = 0;
+	a->c.plane_x = 0;
+	a->c.plane_y = -0.66;
+}
+
+void	init_direction_n(t_all *a)
+{
+	a->c.dir_x = -1;
+	a->c.dir_y = 0;
+	a->c.plane_x = 0;
+	a->c.plane_y = 0.66;
 }

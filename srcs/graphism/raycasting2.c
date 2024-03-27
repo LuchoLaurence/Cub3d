@@ -6,7 +6,7 @@
 /*   By: llaurenc <llaurenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 15:22:02 by llaurenc          #+#    #+#             */
-/*   Updated: 2024/03/21 15:49:10 by llaurenc         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:40:02 by llaurenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,57 @@ void	dist_projected(t_all *a)
 		a->c.drawend = HEIGHT - 1;
 }
 
+void	choose_texture(t_all *a)
+{
+	if (a->c.side == 0 && a->c.raydir_x < 0)
+	{
+		a->c.color_text = a->texture.img_data[0][TEXHEIGHT
+			* a->texture.tex_y + a->texture.tex_x];
+	}
+	if (a->c.side == 0 && a->c.raydir_x > 0)
+	{
+		a->c.color_text = a->texture.img_data[1][TEXHEIGHT
+			* a->texture.tex_y + a->texture.tex_x];
+	}
+	if (a->c.side == 1 && a->c.raydir_y < 0)
+	{
+		a->c.color_text = a->texture.img_data[3][TEXHEIGHT
+			* a->texture.tex_y + a->texture.tex_x];
+	}
+	if (a->c.side == 1 && a->c.raydir_y > 0)
+	{
+		a->c.color_text = a->texture.img_data[2][TEXHEIGHT
+			* a->texture.tex_y + a->texture.tex_x];
+	}
+}
+
 void	print_textures(t_all *a)
 {
-	if (a->map.map[(int)a->c.map_x][(int)a->c.map_y] == '1')
-		a->texture.color = create_trgb(0, 255, 0, 0);
+	a->texture.tex_num = a->map.map[(int)a->c.map_x][(int)a->c.map_y] - 1;
+	if (a->c.side == 0)
+		a->texture.wall_x = a->c.pos_y + a->c.perp_wall_dist * a->c.raydir_y;
 	else
-		a->texture.color = -1;
-	if (a->c.side == 1)
-		a->texture.color = a->texture.color / 2;
-	if (a->texture.color != 1)
-		ft_verline(a, a->c.x, a->texture.color);
+		a->texture.wall_x = a->c.pos_x + a->c.perp_wall_dist * a->c.raydir_x;
+	a->texture.wall_x -= floor((a->texture.wall_x));
+	a->texture.tex_x = (int)(a->texture.wall_x * (double)TEXWIDTH);
+	if (a->c.side == 0 && a->c.raydir_x > 0)
+		a->texture.tex_x = TEXWIDTH - a->texture.tex_x - 1;
+	if (a->c.side == 1 && a->c.raydir_y < 0)
+		a->texture.tex_x = TEXWIDTH - a->texture.tex_x - 1;
+	a->texture.step = 1.0 * TEXHEIGHT / a->c.line_height;
+	a->texture.tex_pos = (a->c.drawstart - HEIGHT / 2
+			+ a->c.line_height / 2) * a->texture.step;
+	a->c.y = a->c.drawstart;
+	while (a->c.y <= a->c.drawend)
+	{
+		a->texture.tex_y = (int)a->texture.tex_pos & (TEXHEIGHT - 1);
+		a->texture.tex_pos += a->texture.step;
+		choose_texture(a);
+		if (a->c.side == 0)
+			a->c.color_text = (a->c.color_text >> 1) & 8355711;
+		my_mlx_pixel_put(a, a->c.x, a->c.y, a->c.color_text);
+		a->c.y ++;
+	}
 }
 
 //draw the pirxels of the stripe as a vertical line

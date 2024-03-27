@@ -6,7 +6,7 @@
 /*   By: llaurenc <llaurenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:55:54 by llaurenc          #+#    #+#             */
-/*   Updated: 2024/03/21 15:59:07 by llaurenc         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:23:14 by llaurenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_forward(t_all *a)
 {
-	if (a->map.map[(int)(a->c.pos_x + a->c.dir_x * a->c.move_speed)]
-		[(int)a->c.pos_y] == '0')
+	if (a->map.map[(int)(a->c.pos_x + a->c.dir_x
+			* a->c.move_speed)][(int)(a->c.pos_y)] == '0')
 		a->c.pos_x += a->c.dir_x * a->c.move_speed;
-	if (a->map.map[(int)a->c.pos_x][(int)(a->c.pos_y + a->c.dir_y
-		* a->c.move_speed)] == '0')
+	if (a->map.map[(int)(a->c.pos_x)][(int)(a->c.pos_y + a->c.dir_y
+			* a->c.move_speed)] == '0')
 		a->c.pos_y += a->c.dir_y * a->c.move_speed;
 }
 

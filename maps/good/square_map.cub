@@ -1,12 +1,12 @@
-      NO            textures/bluestone.xpm
-       SO        textures/colorstone.xpm
-     WE    textures/mossy.xpm
+      NO            textures/coucou.xpm
+       SO        textures/caillou.xpm
+     WE    textures/coucou.xpm
 F   69, 222, 199
 
-EA textures/purplestone.xpm
+EA textures/jolie.xpm
 
 
-C 235, 198, 52
+C 192, 223, 239
 
 111111111111111111111111
 100000000000000000000001
